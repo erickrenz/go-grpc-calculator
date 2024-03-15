@@ -23,6 +23,18 @@ func (s *server) Add(ctx context.Context, in *pb.CalculationRequest) (*pb.Calcul
 	}, nil
 }
 
+func (s *server) Subtract(ctx context.Context, in *pb.CalculationRequest) (*pb.CalculationResponse, error) {
+	return &pb.CalculationResponse{
+		Result: in.A - in.B,
+	}, nil
+}
+
+func (s *server) Multiply(ctx context.Context, in *pb.CalculationRequest) (*pb.CalculationResponse, error) {
+	return &pb.CalculationResponse{
+		Result: in.A * in.B,
+	}, nil
+}
+
 func (s *server) Divide(ctx context.Context, in *pb.CalculationRequest) (*pb.CalculationResponse, error) {
 	if in.B == 0 {
 		return nil, status.Error(codes.InvalidArgument, "cannot divide by zero")
